@@ -26,9 +26,14 @@
 		name: 'cu-custom',
 		computed: {
 			style() {
+				console.log(this);
 				var StatusBar= this.StatusBar;
 				var CustomBar= this.CustomBar;
 				var bgImage = this.bgImage;
+				console.log(StatusBar);
+				console.log(CustomBar);
+				console.log(bgImage);
+
 				var style = `height:${CustomBar}px;padding-top:${StatusBar}px;`;
 				if (this.bgImage) {
 					style = `${style}background-image:url(${bgImage});`;

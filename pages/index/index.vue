@@ -1,25 +1,31 @@
 <template>
 <view>
 <!-- 自定义头部 -->
-<!-- 
-<cu-custom bgColor="bg-gradual-blue" :isBack="true" bgImage="">
+
+<!-- <cu-custom bgColor="bg-gradual-blue" :isBack="true">
 	<block slot="backText">返回</block>
-	<block slot="content">导航栏</block>
-	<block slot="right">右侧区域</block>
-</cu-custom>
--->
-<view class="cu-bar bg-gradual-blue search">
-	<view class="cu-avatar round" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big11010.jpg">
+	<block slot="content">首页</block>
+	<block slot="right">
+		<text class="cuIcon-more"></text>
+	</block>
+</cu-custom> -->
+
+
+<view class="cu-bar bg-gradual-blue search mystyle">
+	<view class="cu-avatar round " style="background-image:url('../../static/logo.png')">
+	<!-- <view class="cu-avatar round " style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big11010.jpg"> -->
 	</view>
 	<view class="search-form radius">
 		<text class="cuIcon-search"></text>
-		<input @focus="InputFocus" @blur="InputBlur" :adjust-position="false" type="text" placeholder="搜索图片、文章、视频" confirm-type="search"></input>
+		<input @click="InputFocus" @blur="InputBlur" :adjust-position="false" type="text" placeholder="搜索图片、文章、视频" confirm-type="search"
+		disabled="true"></input>
 	</view>
 	<view class="action">
 		<text class="cuIcon-edit"></text>
 		<text>签到</text>
 	</view>
 </view>
+
 <!-- 普通轮播 -->
 <view class="margin radius" style="overflow: hidden;">
 
@@ -96,9 +102,9 @@
 				console.log(e);
 				uni.navigateTo({
 					url: '/pages/index/search',
-					success: res => {},
-					fail: () => {},
-					complete: () => {}
+					animationType:"pop-in",
+					animationDuration:300
+
 				});
 			},
 			InputBlur(){
@@ -111,5 +117,8 @@
 </script>
 
 <style>
-
+.mystyle{
+	box-sizing: content-box;
+	padding-top:var(--status-bar-height);
+}
 </style>

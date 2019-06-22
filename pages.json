@@ -14,6 +14,10 @@
 		}
 	],
 	"globalStyle": {
-		"navigationStyle": "custom"
-	}
+		"navigationBarBackgroundColor": "#0081ff",
+		"navigationBarTitleText": "ColorUi",
+		"navigationStyle": "custom",
+		"navigationBarTextStyle": "white"
+	},
+	"usingComponts": true
 }

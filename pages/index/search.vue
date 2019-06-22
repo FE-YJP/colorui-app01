@@ -1,39 +1,30 @@
 <template>
-<view class="content_box">
-	<view class="cu-bar bg-gradual-blue search fixed">
+<view class="content_box fixed">
+	<view class="cu-bar bg-gradual-blue search fixed system-status-bar">
+
 		<!-- <view class="action">
 			<text class="cuIcon-back"></text>
 		</view> -->
 		<view class="search-form radius">
 			<text class="cuIcon-search"></text>
-			<input @focus="InputFocus" @blur="InputBlur" :adjust-position="false" type="text" placeholder="搜索图片、文章、视频" confirm-type="search"></input>
+			<input :focus="true" @focus="InputFocus" @blur="InputBlur" :adjust-position="false" type="text" v-model="search_content" placeholder="搜索图片、文章、视频" confirm-type="search"></input>
 		</view>
 		<view class="action" @tap="Back">
 			<text>取消</text>
 		</view>
 	</view>
 	<!-- 大家都在搜 -->
-	<view class="cu-bar bg-white solid-bottom">
+	<view class="cu-bar bg-white solid-bottom system-margin">
 		<view class='action'>
 			<text class='cuIcon-emoji text-red'></text>
 			<text>大家都在搜</text>
 		</view>
 	</view>
-	<view class="padding-xs bg-white solid-bottom margin-bottom">
+	<view class="padding-xs bg-white solid-bottom">
 		<!-- <view class='cu-tag'>默认</view>
 		<view class='cu-tag round'>椭圆</view> -->
-		<view class='cu-tag radius margin-xs'>游戏</view>
-		<view class='cu-tag radius margin-xs'>张大仙</view>
-		<view class='cu-tag radius margin-xs'>PDD</view>
-		<view class='cu-tag radius margin-xs'>小说</view>
-		<view class='cu-tag radius margin-xs'>王者荣耀</view>
-		<view class='cu-tag radius margin-xs'>视频</view>
-		<view class='cu-tag radius margin-xs'>文章</view>
-		<view class='cu-tag radius margin-xs'>水一大魔王</view>
-		<view class='cu-tag radius margin-xs'>游戏</view>
-		<view class='cu-tag radius margin-xs'>视频</view>
-		<view class='cu-tag radius margin-xs'>千里迢迢</view>
-		<view class='cu-tag radius margin-xs'>我家大师兄脑子有坑</view>
+		<view class='cu-tag radius margin-xs' @click="Search_input(item)" v-for="(item,index) in list" :key="index">{{item}}</view>	
+
 	</view>
 	<!-- <view class="cu-card case">
 		<view class="cu-item shadow">
@@ -62,20 +53,7 @@
 		</view>
 	</view>
 	<view class="padding-xs bg-white solid-bottom  margin-bottom">
-		<!-- <view class='cu-tag'>默认</view>
-		<view class='cu-tag round'>椭圆</view> -->
-		<view class='cu-tag radius margin-xs'>游戏</view>
-		<view class='cu-tag radius margin-xs'>张大仙</view>
-		<view class='cu-tag radius margin-xs'>PDD</view>
-		<view class='cu-tag radius margin-xs'>小说</view>
-		<view class='cu-tag radius margin-xs'>王者荣耀</view>
-		<view class='cu-tag radius margin-xs'>视频</view>
-		<view class='cu-tag radius margin-xs'>文章</view>
-		<view class='cu-tag radius margin-xs'>水一大魔王</view>
-		<view class='cu-tag radius margin-xs'>游戏</view>
-		<view class='cu-tag radius margin-xs'>视频</view>
-		<view class='cu-tag radius margin-xs'>千里迢迢</view>
-		<view class='cu-tag radius margin-xs'>我家大师兄脑子有坑</view>
+		<view class='cu-tag radius margin-xs' @click="Search_input(item)" v-for="(item,index) in list" :key="index">{{item}}</view>		
 	</view>
 	<!-- 探索发现-->
 	<view class="cu-bar bg-white solid-bottom">
@@ -85,20 +63,7 @@
 		</view>
 	</view>
 	<view class="padding-xs bg-white solid-bottom margin-bottom">
-		<!-- <view class='cu-tag'>默认</view>
-		<view class='cu-tag round'>椭圆</view> -->
-		<view class='cu-tag radius margin-xs'>游戏</view>
-		<view class='cu-tag radius margin-xs'>张大仙</view>
-		<view class='cu-tag radius margin-xs'>PDD</view>
-		<view class='cu-tag radius margin-xs'>小说</view>
-		<view class='cu-tag radius margin-xs'>王者荣耀</view>
-		<view class='cu-tag radius margin-xs'>视频</view>
-		<view class='cu-tag radius margin-xs'>文章</view>
-		<view class='cu-tag radius margin-xs'>水一大魔王</view>
-		<view class='cu-tag radius margin-xs'>游戏</view>
-		<view class='cu-tag radius margin-xs'>视频</view>
-		<view class='cu-tag radius margin-xs'>千里迢迢</view>
-		<view class='cu-tag radius margin-xs'>我家大师兄脑子有坑</view>
+		<view class='cu-tag radius margin-xs' @click="Search_input(item)" v-for="(item,index) in list" :key="index">{{item}}</view>	
 	</view>
 	<!--推荐-->
 	<view class="cu-bar bg-white solid-bottom">
@@ -108,20 +73,7 @@
 		</view>
 	</view>
 	<view class="padding-xs bg-white solid-bottom margin-bottom">
-		<!-- <view class='cu-tag'>默认</view>
-		<view class='cu-tag round'>椭圆</view> -->
-		<view class='cu-tag radius margin-xs'>游戏</view>
-		<view class='cu-tag radius margin-xs'>张大仙</view>
-		<view class='cu-tag radius margin-xs'>PDD</view>
-		<view class='cu-tag radius margin-xs'>小说</view>
-		<view class='cu-tag radius margin-xs'>王者荣耀</view>
-		<view class='cu-tag radius margin-xs'>视频</view>
-		<view class='cu-tag radius margin-xs'>文章</view>
-		<view class='cu-tag radius margin-xs'>水一大魔王</view>
-		<view class='cu-tag radius margin-xs'>游戏</view>
-		<view class='cu-tag radius margin-xs'>视频</view>
-		<view class='cu-tag radius margin-xs'>千里迢迢</view>
-		<view class='cu-tag radius margin-xs'>我家大师兄脑子有坑</view>
+		<view class='cu-tag radius margin-xs' @click="Search_input(item)" v-for="(item,index) in list" :key="index">{{item}}</view>	
 	</view>
 	
 </view>
@@ -131,11 +83,12 @@
 	export default{
 		data(){
 			return{
-				
+				search_content:"",
+				list:["游戏","张大仙","PDD","王者荣耀","英雄联盟","饥荒","LEX","我家大师兄脑子有坑","江小白","鬼刀","元尊","JOJO","舞蹈"]
 			}
 		},
 		onLoad() {
-		
+			
 		},
 		methods: {
 			InputFocus(e){
@@ -145,12 +98,13 @@
 				
 			},
 			Back(){
-				uni.navigateTo({
-					url: '/pages/index/index',
-					success: res => {},
-					fail: () => {},
-					complete: () => {}
-				});
+				// 返回
+				uni.navigateBack({
+					
+				})
+			},
+			Search_input(e){
+				this.search_content=e;
 			}
 		}
 	}
@@ -160,6 +114,13 @@
 <style>
 .content_box{
 	box-sizing: border-box;
-	padding-top: 100upx;
+	padding-top:100upx;
+}
+.system-status-bar{
+	box-sizing: content-box;
+	padding-top:var(--status-bar-height);
+}
+.system-margin{
+	margin-top:var(--status-bar-height) ;
 }
 </style>

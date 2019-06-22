@@ -5,6 +5,7 @@
 			console.log('App Launch');
 			uni.getSystemInfo({
 				success: function(e) {
+					console.log(e)
 					// #ifndef MP
 					Vue.prototype.StatusBar = e.statusBarHeight;
 					if (e.platform == 'android') {
