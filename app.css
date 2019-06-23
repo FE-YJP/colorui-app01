@@ -1,0 +1,11 @@
+.content_box{
+	box-sizing: border-box;
+	padding-top:100upx;
+}
+.system-status-bar{
+	box-sizing: content-box;
+	padding-top:var(--status-bar-height);
+}
+.system-margin{
+	margin-top:var(--status-bar-height);
+}

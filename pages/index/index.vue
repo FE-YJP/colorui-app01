@@ -1,5 +1,5 @@
 <template>
-<view>
+<view class="content_box fixed">
 <!-- 自定义头部 -->
 
 <!-- <cu-custom bgColor="bg-gradual-blue" :isBack="true">
@@ -11,7 +11,7 @@
 </cu-custom> -->
 
 
-<view class="cu-bar bg-gradual-blue search mystyle">
+<view class="cu-bar bg-gradual-blue search system-status-bar fixed">
 	<view class="cu-avatar round " style="background-image:url('../../static/logo.png')">
 	<!-- <view class="cu-avatar round " style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big11010.jpg"> -->
 	</view>
@@ -20,14 +20,15 @@
 		<input @click="InputFocus" @blur="InputBlur" :adjust-position="false" type="text" placeholder="搜索图片、文章、视频" confirm-type="search"
 		disabled="true"></input>
 	</view>
-	<view class="action">
+	<view class="action" @click="Sign">
 		<text class="cuIcon-edit"></text>
 		<text>签到</text>
 	</view>
 </view>
 
 <!-- 普通轮播 -->
-<view class="margin radius" style="overflow: hidden;">
+<view class="system-margin">
+<view class="margin radius " style="overflow: hidden;">
 
 <swiper class="screen-swiper" :class="dotStyle?'square-dot':'round-dot'" :indicator-dots="true" :circular="true" :autoplay="true" interval="5000" duration="500">
 	<swiper-item v-for="(item,index) in swiperList" :key="index">
@@ -36,6 +37,8 @@
 </swiper>
 
 </view>
+</view>
+
 <!-- 卡片轮播 -->
 <swiper class="card-swiper" :class="dotStyle?'square-dot':'round-dot'" :indicator-dots="true" :circular="true" :autoplay="true" interval="5000" duration="500" @change="cardSwiper" indicator-color="#8799a3"
  indicator-active-color="#0081ff">
@@ -60,6 +63,25 @@
 	</view>
 </view>
 
+<view class="cu-form-group">
+				<view class="title">时间选择</view>
+				<picker mode="time" :value="time" start="09:01" end="21:01" @change="TimeChange">
+					<view class="picker">
+						{{time}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
+				<view class="title">日期选择</view>
+				<picker mode="date" :value="date" start="2015-09-01" end="2020-09-01" @change="DateChange">
+					<view class="picker">
+						{{date}}
+					</view>
+				</picker>
+			</view>
+
+
+
 </view>
 </template>
 
@@ -83,7 +105,9 @@
 					id: 2,
 					type: 'image',
 					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
-				}]
+				}],
+				time: '12:01',
+				date: '2018-12-25',
 			}
 		},
 		onLoad() {
@@ -107,7 +131,23 @@
 
 				});
 			},
+			// 签到页面
+			Sign(e){
+				console.log(e);
+				uni.navigateTo({
+					url: '/pages/index/sign',
+					animationType:"pop-in",
+					animationDuration:300
+				
+				});
+			},
 			InputBlur(){
+				
+			},
+			TimeChange(){
+				
+			},
+			DateChange(){
 				
 			}
 			
@@ -117,8 +157,5 @@
 </script>
 
 <style>
-.mystyle{
-	box-sizing: content-box;
-	padding-top:var(--status-bar-height);
-}
+
 </style>

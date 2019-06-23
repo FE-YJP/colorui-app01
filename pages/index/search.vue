@@ -121,6 +121,6 @@
 	padding-top:var(--status-bar-height);
 }
 .system-margin{
-	margin-top:var(--status-bar-height) ;
+	margin-top:var(--status-bar-height);
 }
 </style>
